@@ -34,5 +34,21 @@ public class Main {
         }
     }
 
+    public static boolean intersects(int line1[], int line2[]) {
+        float slope1 = ((float) (line1[3] - line1[1])) / (float) ((line1[2] - line1[0]));
+        float slope2 = ((float) (line2[3] - line2[1])) / (float) ((line2[2] - line2[0]));
+        if (slope1 == slope2)
+            return false;
+        else {
+            float intersectionPoint = (line2[1] - line1[1] + (slope1 * line1[0]) - (slope2 * line2[0])) / (slope1 - slope2);
+            int domain1[] = new int[2];
+            domain1[0] = (line1[0] < line1[2]) ? line1[0] : line1[2];
+            domain1[1] = (line1[0] > line1[2]) ? line1[0] : line1[2];
+            int domain2[] = new int[2];
+            domain2[0] = (line2[0] < line2[2]) ? line2[0] : line2[2];
+            domain2[1] = (line2[0] > line2[2]) ? line2[0] : line2[2];
+            return (intersectionPoint >= domain1[0] && intersectionPoint >= domain2[0] && intersectionPoint <= domain1[1] && intersectionPoint <= domain2[1]);
+        }
+    }
 
 }
